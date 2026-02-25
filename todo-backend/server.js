@@ -20,7 +20,9 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "https://task-management-1kan.vercel.app/", // your real frontend URL
+    origin: "https://task-management-1kan.vercel.app", // your exact frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type"],
   }),
 );
 app.use(express.json()); // parses incoming JSON request bodies
