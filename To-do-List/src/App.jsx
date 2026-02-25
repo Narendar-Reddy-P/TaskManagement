@@ -88,7 +88,8 @@ export default function App() {
 
   useEffect(() => {
     async function loadTasks() {
-      const res = await fetch("http://localhost:5000/api/tasks");
+      const res =
+        "https://task-management-p9ncjy4d5-narendar-reddy-ps-projects.vercel.app/api/tasks";
       const data = await res.json();
       setTasks(data);
     }
@@ -106,15 +107,21 @@ export default function App() {
 
   // --- Handlers ---
   async function handleToggleComplete(id) {
-    const res = await fetch(`http://localhost:5000/api/tasks/${id}/complete`, {
-      method: "PATCH",
-    });
+    const res = await fetch(
+      `https://task-management-p9ncjy4d5-narendar-reddy-ps-projects.vercel.app/api/tasks/${id}/complete`,
+      {
+        method: "PATCH",
+      },
+    );
     const updated = await res.json();
     setTasks(tasks.map((t) => (t._id === id ? updated : t)));
   }
 
   async function handleDelete(id) {
-    await fetch(`http://localhost:5000/api/tasks/${id}`, { method: "DELETE" });
+    await fetch(
+      `https://task-management-p9ncjy4d5-narendar-reddy-ps-projects.vercel.app/api/tasks/${id}`,
+      { method: "DELETE" },
+    );
     setTasks(tasks.filter((t) => t._id !== id));
   }
 
@@ -140,7 +147,7 @@ export default function App() {
     // REPLACE with this:
     if (editingTask) {
       const res = await fetch(
-        `http://localhost:5000/api/tasks/${editingTask._id}`,
+        `https://task-management-p9ncjy4d5-narendar-reddy-ps-projects.vercel.app/api/tasks/${editingTask._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -150,11 +157,14 @@ export default function App() {
       const updated = await res.json();
       setTasks(tasks.map((t) => (t._id === updated._id ? updated : t)));
     } else {
-      const res = await fetch("http://localhost:5000/api/tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        "https://task-management-p9ncjy4d5-narendar-reddy-ps-projects.vercel.app/api/tasks",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        },
+      );
       const newTask = await res.json();
       setTasks([...tasks, newTask]);
     }
