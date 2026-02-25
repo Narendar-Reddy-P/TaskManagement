@@ -18,7 +18,11 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors()); // allows React frontend to talk to this server
+app.use(
+  cors({
+    origin: "https://task-management-1kan.vercel.app/", // your real frontend URL
+  }),
+);
 app.use(express.json()); // parses incoming JSON request bodies
 
 // Routes
